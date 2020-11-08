@@ -1,9 +1,14 @@
 import re
 
+def get_number_of_results(page_soup):
+    results_number = page_soup.find("meta",{"content":"website"})
+    results_number = results_number.link.title.get_text('')
+    results_number = int(results_number[:3].strip()) # this is technical debt
+    return results_number
+
 def transform_job(job_description):
     job_description = job_description.replace('\n',' ')
     job_description = job_description.replace(' go ',' ')
-    #job_description = re.sub(r'\d', ' ', job_description)
     job_description = job_description.upper()
     job_description = job_description.replace("E.G",'EG')
     job_description = job_description.replace("'RE",'RE')
@@ -43,3 +48,10 @@ def transform_job(job_description):
     job_description = job_description.split(' ')
 
     return job_description
+
+def on_zi_list(job_description, white_list):
+    tally_list = []
+    for word in white_list:
+        if word in job_description:
+            tally_list.append(word)
+    return tally_list

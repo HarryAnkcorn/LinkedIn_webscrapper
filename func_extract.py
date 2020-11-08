@@ -3,12 +3,15 @@ from urllib.request import urlopen
 
 def web_scrap(url):
     uclient = urlopen(url)
+    uclient.addheaders = ('User-agent', 'Mozilla/5.0')
     page_html = uclient.read()
     uclient.close()
-    return page_html
+    page_soup = soupifie(page_html)
+    return page_soup
 
 def soupifie(page_html):
-    pass
+    page_soup = soup(page_html, "html.parser")
+    return page_soup
 
 def load_white_list():
     white_list = []
@@ -18,5 +21,4 @@ def load_white_list():
             if line.isupper(): 
                 white_list.append(line.strip())
     f.close()
-    
     return white_list
