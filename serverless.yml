@@ -33,3 +33,19 @@ functions:
         Resource:
           - arn:aws:s3:::linkedinwebscrap
           - arn:aws:s3:::linkedinwebscrap/*
+  graphing:
+    runtime: python3.8
+    handler: matplotlib_test.lambda_handler
+    timeout: 500
+    module: graph_lambda
+    include:
+      - graph_lambda
+    iamRoleStatements:
+      - Effect: 'Allow'
+        Action:
+          - s3:GetObject
+          - s3:ListBucket
+          - s3:PutObject
+        Resource:
+          - arn:aws:s3:::linkedinwebscrap
+          - arn:aws:s3:::linkedinwebscrap/*
