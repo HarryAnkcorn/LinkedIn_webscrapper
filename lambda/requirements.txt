@@ -1,2 +1,4 @@
-bs4==4.9.2
+beautifulsoup4==4.9.3 
+bs4==0.0.1 
+soupsieve==2.0.1
 python-dotenv==0.14.0
