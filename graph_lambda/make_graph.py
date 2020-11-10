@@ -5,11 +5,17 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import ast
 from collections import defaultdict
+import boto3
 
 data = []
 
 def graphing(event, context):
-    with open('/tmp/job_data.csv', 'r') as csvfile: # make this /tmp/ in lambda
+    bucketname = 'linkedinwebscrap' # replace with your bucket name
+    s3 = boto3.resource('s3')
+    newfile = f'/tmp/job_data.csv'
+    s3.Bucket(bucketname).download_file('job_data.csv', newfile)
+
+    with open('tmp/job_data.csv', 'r') as csvfile: # make this /tmp/ in lambda
         csv_reader = csv.reader(csvfile, delimiter=',')
         for row in csv_reader:
             data.append(row)
