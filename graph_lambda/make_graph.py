@@ -8,8 +8,8 @@ from collections import defaultdict
 
 data = []
 
-def graphing():
-    with open('tmp/job_data.csv', 'r') as csvfile: # make this /tmp/ in lambda
+def graphing(event, context):
+    with open('/tmp/job_data.csv', 'r') as csvfile: # make this /tmp/ in lambda
         csv_reader = csv.reader(csvfile, delimiter=',')
         for row in csv_reader:
             data.append(row)
@@ -49,7 +49,4 @@ def graphing():
     plt.legend(skill_results.keys())
 
     plt.grid()
-    plt.savefig('tmp/plot.png')
-
-    
-graphing()
+    plt.savefig('plot.png')
