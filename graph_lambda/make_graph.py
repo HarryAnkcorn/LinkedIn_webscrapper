@@ -24,7 +24,7 @@ def graphing(event, context):
 
     dates = []
     amount_of_jobs = []
-    skills = ['PYTHON', 'SQL', 'AWS']
+    skills = ['PYTHON', 'SQL', 'AWS', 'GCP', 'AZURE', 'MACHINELEARNING', 'SPARK', 'KAFKA', 'EXCEL']
     skill_results = defaultdict(list)
 
     for row in data:
