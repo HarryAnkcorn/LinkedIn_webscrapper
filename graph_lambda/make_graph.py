@@ -41,6 +41,7 @@ def graphing(event, context):
             else:
                 skill_results[word].append(day_tally[word])
 
+    plt.figure(figsize=(9, 4))
     ax = plt.gca()
     formatter = mdates.DateFormatter("%Y-%m-%d")
     ax.xaxis.set_major_formatter(formatter)
@@ -48,15 +49,12 @@ def graphing(event, context):
     ax.xaxis.set_major_locator(locator)
     plt.xlabel('Date')
 
-    # plt.ylabel('Amount Of Jobs')
-    # plt.plot(dates, amount_of_jobs, label = dates)
-
     plt.ylabel('Results')
     for word in skill_results:
         plt.plot(dates, skill_results[word], label = word)       
     plt.legend(skill_results.keys())
 
     plt.grid()
-    plt.savefig('/tmp/plot.png')
+    plt.savefig('/tmp/plot.png', bbox_inches = 'tight')
     s3 = boto3.resource('s3')
     s3.meta.client.upload_file('/tmp/plot.png', 'linkedinwebscrap', 'plot.png')
