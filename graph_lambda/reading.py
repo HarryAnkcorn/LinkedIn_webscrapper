@@ -28,13 +28,10 @@ def make_list_from_txt(file_name):
 
 def tally_skills(data, skills):
     skill_results = defaultdict(list)
-    amount_of_jobs = []
     dates = []
     for row in data:
         date_lst = row[0].split('-')
         dates.append(date(int(date_lst[0]),int(date_lst[1]),int(date_lst[2])))
-        
-        amount_of_jobs.append(int(row[1]))
 
         day_tally = row[3].strip('"Counter()')
         day_tally = ast.literal_eval(day_tally)
@@ -43,7 +40,7 @@ def tally_skills(data, skills):
                 skill_results[word].append(0)
             else:
                 skill_results[word].append(day_tally[word])
-    return amount_of_jobs, dates, skill_results
+    return dates, skill_results
 
 def make_graph(dates, skill_results, graph_file_name):
     plt.figure(figsize=(9, 4))
@@ -57,7 +54,7 @@ def make_graph(dates, skill_results, graph_file_name):
     plt.ylabel('Results')
     for word in skill_results:
         plt.plot(dates, skill_results[word], label = word)       
-    plt.legend(skill_results.keys(), loc='bottom left')
+    plt.legend(skill_results.keys(), loc='lower left')
 
     plt.grid()
     plt.savefig(f'/tmp/{graph_file_name}', bbox_inches = 'tight')

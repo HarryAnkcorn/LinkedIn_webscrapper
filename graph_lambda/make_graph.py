@@ -21,7 +21,7 @@ def graphing(event, context):
     data = make_list_from_csv(data_file_name)
     skills = make_list_from_txt(words_file_name)
 
-    amount_of_jobs, dates, skill_results = tally_skills(data, skills)
+    dates, skill_results = tally_skills(data, skills)
 
     make_graph(dates, skill_results, graph_file_name)
 
