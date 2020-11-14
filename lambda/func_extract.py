@@ -24,3 +24,4 @@ def load_white_list():
                 white_list.append(line.strip())
     f.close()
     return white_list
+

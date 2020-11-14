@@ -1,60 +1,28 @@
-import matplotlib
-import csv
-from datetime import date
-import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
-import ast
-from collections import defaultdict
-import boto3
-
-data = []
+# import matplotlib
+# import csv
+# from datetime import date
+# import matplotlib.pyplot as plt
+# import matplotlib.dates as mdates
+# import ast
+# from collections import defaultdict
+# import boto3
+from bucket_functions import get_file_from_s3, save_to_bucket
+from reading import make_list_from_csv, make_list_from_txt, tally_skills, make_graph
 
 def graphing(event, context):
-    bucketname = 'linkedinwebscrap' # replace with your bucket name
-    s3 = boto3.resource('s3')
-    newfile = f'/tmp/job_data.csv'
-    s3.Bucket(bucketname).download_file('job_data.csv', newfile)
+    bucketname = 'linkedinwebscrap'
+    data_file_name = 'job_data.csv'
+    graph_file_name = 'plot.png'
+    words_file_name = 'words_to_plot.txt'
 
-    print('here')
-    
-    with open('/tmp/job_data.csv', 'r') as csvfile: # make this /tmp/ in lambda
-        csv_reader = csv.reader(csvfile, delimiter=',')
-        for row in csv_reader:
-            data.append(row)
+    get_file_from_s3(bucketname, data_file_name)
+    get_file_from_s3(bucketname, words_file_name)
 
-    dates = []
-    amount_of_jobs = []
-    skills = ['PYTHON', 'SQL', 'AWS', 'GCP', 'AZURE', 'MACHINELEARNING', 'SPARK', 'KAFKA', 'EXCEL']
-    skill_results = defaultdict(list)
+    data = make_list_from_csv(data_file_name)
+    skills = make_list_from_txt(words_file_name)
 
-    for row in data:
-        date_lst = row[0].split('-')
-        dates.append(date(int(date_lst[0]),int(date_lst[1]),int(date_lst[2])))
-        
-        amount_of_jobs.append(int(row[1]))
+    amount_of_jobs, dates, skill_results = tally_skills(data, skills)
 
-        day_tally = row[3].strip('"Counter()')
-        day_tally = ast.literal_eval(day_tally)
-        for word in skills:
-            if word not in day_tally:
-                skill_results[word].append(0)
-            else:
-                skill_results[word].append(day_tally[word])
+    make_graph(dates, skill_results, graph_file_name)
 
-    plt.figure(figsize=(9, 4))
-    ax = plt.gca()
-    formatter = mdates.DateFormatter("%Y-%m-%d")
-    ax.xaxis.set_major_formatter(formatter)
-    locator = mdates.DayLocator()
-    ax.xaxis.set_major_locator(locator)
-    plt.xlabel('Date')
-
-    plt.ylabel('Results')
-    for word in skill_results:
-        plt.plot(dates, skill_results[word], label = word)       
-    plt.legend(skill_results.keys())
-
-    plt.grid()
-    plt.savefig('/tmp/plot.png', bbox_inches = 'tight')
-    s3 = boto3.resource('s3')
-    s3.meta.client.upload_file('/tmp/plot.png', 'linkedinwebscrap', 'plot.png')
+    save_to_bucket(bucketname, graph_file_name)
