@@ -1,4 +1,4 @@
-service: job_scrape
+service: jobscrape
 
 plugins:
   - serverless-python-requirements
