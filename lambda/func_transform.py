@@ -34,9 +34,14 @@ def transform_job(job_description):
     job_description = job_description.replace(' PL SQL ',' PLSQL ')
     job_description = job_description.replace(' BIG DATA ',' BIGDATA ')
     job_description = job_description.replace(' POWER BI ',' POWERBI ')
-    job_description = job_description.replace(' MACHINE LEARNING ',' MACHINELEARNING ')
+    job_description = job_description.replace(' MACHINE LEARNING ',' ML ')
     job_description = job_description.replace(' DATA WAREHOUSE ',' DATAWAREHOUSING ')
     job_description = job_description.replace(' DATA WAREHOUSING ',' DATAWAREHOUSING ')
+    job_description = job_description.replace(' DATA MINING ',' DATAMINING ')
+    job_description = job_description.replace(' GRADIENT BOOST',' GRADIENTBOOSTING ')
+    job_description = job_description.replace(' NEURAL NETWORK',' NEURALNETWORK ')
+    job_description = job_description.replace(' DATALAKES ',' DATA LAKES ')
+    job_description = job_description.replace(' RANDOM FOREST ',' RANDOMFOREST ')
     job_description = job_description.replace(' SCIKIT LEARN ',' SCIKITLEARN ')
     job_description = job_description.replace(' GOOGLE CLOUD PLATFORM', 'GCP')
     job_description = job_description.replace(' DATA SCIENCE ', ' DATASCIENCE ')
@@ -48,6 +53,7 @@ def transform_job(job_description):
     job_description = job_description.replace(' CLOUD SERVICES ', ' CLOUDCOMPUTING ')
     job_description = job_description.replace(' CLOUD BASED ', ' CLOUDCOMPUTING ')
     job_description = job_description.replace(' WEB SCRAPING ', 'WEBSCRAPING')
+    job_description = job_description.replace(' A I ', ' AI '
     job_description = job_description.split(' ')
 
     return job_description
