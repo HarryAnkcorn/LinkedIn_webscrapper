@@ -24,6 +24,8 @@ functions:
     module: lambda
     include:
       - lambda
+    events:
+      - schedule: cron(30 5 ? * * *)
     iamRoleStatements:
       - Effect: 'Allow'
         Action:
@@ -33,6 +35,7 @@ functions:
         Resource:
           - arn:aws:s3:::linkedinwebscrap
           - arn:aws:s3:::linkedinwebscrap/*
+
   graphing:
     runtime: python3.8
     handler: make_graph.graphing
@@ -40,6 +43,13 @@ functions:
     module: graph_lambda
     include:
       - graph_lambda
+    events:
+      - s3:
+          bucket: linkedinwebscrap
+          event: s3:ObjectCreated:Put
+          rules:
+            - suffix: .csv
+          existing: true
     iamRoleStatements:
       - Effect: 'Allow'
         Action:
