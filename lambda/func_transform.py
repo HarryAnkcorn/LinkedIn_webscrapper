@@ -53,7 +53,7 @@ def transform_job(job_description):
     job_description = job_description.replace(' CLOUD SERVICES ', ' CLOUDCOMPUTING ')
     job_description = job_description.replace(' CLOUD BASED ', ' CLOUDCOMPUTING ')
     job_description = job_description.replace(' WEB SCRAPING ', 'WEBSCRAPING')
-    job_description = job_description.replace(' A I ', ' AI '
+    job_description = job_description.replace(' A I ', ' AI ')
     job_description = job_description.split(' ')
 
     return job_description
