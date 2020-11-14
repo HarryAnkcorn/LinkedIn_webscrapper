@@ -1,9 +1,12 @@
 import re
 
 def get_number_of_results(page_soup):
-    results_number = page_soup.find("meta",{"content":"website"})
-    results_number = results_number.link.title.get_text('')
-    results_number = int(results_number[:3].strip()) # this is technical debt
+    try:
+        results_number = page_soup.find("meta",{"content":"website"})
+        results_number = results_number.link.title.get_text('')
+        results_number = int(results_number[:3].strip()) # this is technical debt
+    except:
+        results_number = 0
     return results_number
 
 def transform_job(job_description):
@@ -44,7 +47,7 @@ def transform_job(job_description):
     job_description = job_description.replace(' CLOUD COMPUTING ', ' CLOUDCOMPUTING ')
     job_description = job_description.replace(' CLOUD SERVICES ', ' CLOUDCOMPUTING ')
     job_description = job_description.replace(' CLOUD BASED ', ' CLOUDCOMPUTING ')
-    job_description = job_description.replace(' WEB SCRAPPING ', 'WEBSCRAPPING')
+    job_description = job_description.replace(' WEB SCRAPING ', 'WEBSCRAPING')
     job_description = job_description.split(' ')
 
     return job_description

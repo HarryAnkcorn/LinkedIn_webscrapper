@@ -1,11 +1,3 @@
-# import matplotlib
-# import csv
-# from datetime import date
-# import matplotlib.pyplot as plt
-# import matplotlib.dates as mdates
-# import ast
-# from collections import defaultdict
-# import boto3
 from bucket_functions import get_file_from_s3, save_to_bucket
 from reading import make_list_from_csv, make_list_from_txt, tally_skills, make_graph
 
