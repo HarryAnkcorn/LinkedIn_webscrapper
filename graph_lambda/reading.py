@@ -5,6 +5,7 @@ from collections import defaultdict
 import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
+from numpy import arange
 
 def make_list_from_csv(file_name):
     lst = []
@@ -50,11 +51,16 @@ def make_graph(dates, skill_results, graph_file_name):
     locator = mdates.DayLocator()
     ax.xaxis.set_major_locator(locator)
     plt.xlabel('Date')
-
     plt.ylabel('Results')
+    
     for word in skill_results:
         plt.plot(dates, skill_results[word], label = word)       
     plt.legend(skill_results.keys(), loc='lower left')
+
+    max_word = max(skill_results)
+    max_num = max(skill_results[max_word])
+
+    plt.yticks(arange(0, max_num + 2, step=2))
 
     plt.grid()
     plt.savefig(f'/tmp/{graph_file_name}', bbox_inches = 'tight')
