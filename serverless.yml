@@ -43,13 +43,13 @@ functions:
     module: graph_lambda
     include:
       - graph_lambda
-    # events:
-    #   - s3:
-    #       bucket: linkedinwebscrap
-    #       event: s3:ObjectCreated:Put
-    #       rules:
-    #         - suffix: .csv
-    #       existing: true
+    events:
+      - s3:
+          bucket: linkedinwebscrap
+          event: s3:ObjectCreated:Put
+          rules:
+            - suffix: .csv
+          existing: true
     iamRoleStatements:
       - Effect: 'Allow'
         Action:
