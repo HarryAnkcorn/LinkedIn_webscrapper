@@ -60,7 +60,10 @@ def make_graph(dates, skill_results, graph_file_name):
     max_word = max(skill_results)
     max_num = max(skill_results[max_word])
 
+    ax.set_xlim(dates[0], dates[-1])
+    
     plt.yticks(arange(0, max_num + 2, step=2))
+    ax.set_ylim(0, max_num)
 
     plt.grid()
     plt.savefig(f'/tmp/{graph_file_name}', bbox_inches = 'tight')
