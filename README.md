@@ -12,7 +12,9 @@ job scrape lambda
     ⋅⋅⋅Writes: job_data.csv⋅⋅
 
 **plot lambda**
-   Purpose: Creates and saves a matplotlib graph as a image. The graph plots the frequency of words in the words_to_plot.txt and job_data.csv against the date  
+
+   Purpose: Creates and saves a matplotlib graph as a image. The graph plots the frequency of words in the words_to_plot.txt and job_data.csv against the date
+
    Trigger: updating of job_data.csv  
    Reads: job_data.csv, words_to_plot.txt  
    Writes: plot.png  
