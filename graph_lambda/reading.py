@@ -57,12 +57,22 @@ def make_graph(dates, skill_results, graph_file_name):
         plt.plot(dates, skill_results[word], label = word)       
     plt.legend(skill_results.keys(), loc='lower left')
 
-    max_word = max(skill_results)
-    max_num = max(skill_results[max_word])
-
-    ax.set_xlim(dates[0], dates[-1])
+    max_num = 12
+    min_mun = 4
+    for key in skill_results.keys():
+        high_num = max(skill_results[key])
+        low_num = min(skill_results[key])
+        if high_num > max_num:
+            max_num = high_num
+        if low_num < min_mun:
+            min_mun = low_num
     
+    max_num = max_num / 2
+    max_num = round(max_num)
+    max_num = 2 * max_num
+
     plt.yticks(arange(0, max_num + 2, step=2))
+    ax.set_xlim(dates[0], dates[-1])
     ax.set_ylim(0, max_num)
 
     plt.grid()

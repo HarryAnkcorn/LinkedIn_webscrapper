@@ -1,5 +1,4 @@
 from collections import Counter
-# import os.path
 from bucket_functions import get_file_from_s3, save_to_bucket, make_list_from_txt
 from web_scraping import web_scrape
 from func_transform import get_number_of_results, transform_job, on_zi_list
