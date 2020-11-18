@@ -46,7 +46,7 @@ def tally_skills(data, skills):
 def make_graph(dates, skill_results, graph_file_name):
     plt.figure(figsize=(9, 4))
     ax = plt.gca()
-    formatter = mdates.DateFormatter("%Y-%m-%d")
+    formatter = mdates.DateFormatter("%d/%m")
     ax.xaxis.set_major_formatter(formatter)
     locator = mdates.DayLocator()
     ax.xaxis.set_major_locator(locator)
