@@ -55,7 +55,7 @@ def make_graph(dates, skill_results, graph_file_name):
     
     for word in skill_results:
         plt.plot(dates, skill_results[word], label = word)       
-    plt.legend(skill_results.keys(), loc='lower left')
+    plt.legend(skill_results.keys(), loc='upper left')
 
     max_num = 12
     min_mun = 4
