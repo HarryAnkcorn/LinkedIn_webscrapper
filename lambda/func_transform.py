@@ -9,6 +9,8 @@ def get_number_of_results(page_soup):
         results_number = 0
     return results_number
 
+
+# fix
 def transform_job(job_description):
     job_description = job_description.replace('\n',' ')
     job_description = job_description.replace(' go ',' ')

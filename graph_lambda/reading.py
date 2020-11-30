@@ -1,5 +1,6 @@
 import csv
-from datetime import date
+import datetime
+from datetime import timedelta
 import ast
 from collections import defaultdict
 import matplotlib
@@ -71,9 +72,28 @@ def make_graph(dates, skill_results, graph_file_name):
     max_num = round(max_num)
     max_num = 2 * max_num
 
-    plt.yticks(arange(0, max_num + 2, step=2))
-    ax.set_xlim(dates[0], dates[-1])
+    plt.yticks(arange(0, max_num + 2, step=2))    
+    
+    all_days_list = get_list_of_days(dates[0], dates[-1])
+    plt.xticks(all_days_list[0::2])
+    
+    ax.set_xlim(all_days_list[0], all_days_list[-1])
     ax.set_ylim(0, max_num)
 
     plt.grid()
     plt.savefig(f'/tmp/{graph_file_name}', bbox_inches = 'tight')
+
+def get_list_of_days(sdate, edate):
+    delta = edate - sdate   # as timedelta
+
+    number_of_days = (str(delta)).split(' ')[0]
+    if int(number_of_days) % 2 == 0:
+        x = 1
+    else:
+        x = 2
+
+    days = []
+    for i in range(delta.days + x):
+        day = sdate + timedelta(days=i)
+        days.append(day)
+    return days
