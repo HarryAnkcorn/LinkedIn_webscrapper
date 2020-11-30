@@ -1,6 +1,6 @@
 import csv
 import datetime
-from datetime import timedelta
+from datetime import timedelta, date
 import ast
 from collections import defaultdict
 import matplotlib
