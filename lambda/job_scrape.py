@@ -5,7 +5,7 @@ from func_transform import get_number_of_results, transform_job, on_zi_list
 from func_load import append_to_csv
 
 def lambda_handler(event, context):
-    url = 'https://www.linkedin.com/jobs/search/?f_E=2&f_TP=1&geoId=101165590&keywords=junior%2Bdata%2Bengineer&location=United%2BKingdom&sortBy=R&redirect=false&position=1&pageNum=0'
+    url = 'https://uk.linkedin.com/jobs/search?keywords=junior%2Bdata%2Bengineer&location=England%2C%2BUnited%2BKingdom&trk=homepage-jobseeker_jobs-search-bar_search-submit&f_TP=1&f_E=2&redirect=false&position=1&pageNum=0'
     bucketname = 'linkedinwebscrap'
     data_file_name = 'job_data.csv'
     words_file_name = 'words_to_track.txt'
