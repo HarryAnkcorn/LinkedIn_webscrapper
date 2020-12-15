@@ -75,7 +75,7 @@ def make_graph(dates, skill_results, graph_file_name):
     plt.yticks(arange(0, max_num + 2, step=2))    
     
     all_days_list = get_list_of_days(dates[0], dates[-1])
-    plt.xticks(all_days_list[0::2])
+    plt.xticks(all_days_list[0::3])
     
     ax.set_xlim(all_days_list[0], all_days_list[-1])
     ax.set_ylim(0, max_num)
@@ -90,7 +90,7 @@ def get_list_of_days(sdate, edate):
     if int(number_of_days) % 2 == 0:
         x = 1
     else:
-        x = 2
+        x = 3
 
     days = []
     for i in range(delta.days + x):
