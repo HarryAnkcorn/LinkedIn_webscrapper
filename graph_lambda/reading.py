@@ -87,7 +87,7 @@ def get_list_of_days(sdate, edate):
     delta = edate - sdate   # as timedelta
 
     number_of_days = (str(delta)).split(' ')[0]
-    if int(number_of_days) % 2 == 0:
+    if int(number_of_days) % 3 == 0:
         x = 1
     else:
         x = 3
